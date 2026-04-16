@@ -14,7 +14,7 @@ TRAITS = [
     "Entirely made of bouncy castle material.",
     "The native language is interpretative dance.",
     "Oceans are made of carbonated grape soda.",
-    "Every rock vibrates with lo-fi beats.."
+    "Every rock vibrates with lo-fi beats..."
 ]
 
 @app.route('/')
