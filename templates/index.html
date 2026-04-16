@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galactic Planet Generator</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0b0c10;
+            color: #66fcf1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+        }
+        .container {
+            background-color: #1f2833;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(102, 252, 241, 0.4);
+            max-width: 500px;
+        }
+        h1 {
+            color: #45a29e;
+        }
+        .planet-card {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #0b0c10;
+            border: 1px solid #45a29e;
+            border-radius: 10px;
+            min-height: 100px;
+        }
+        #planet-name {
+            font-size: 2.5em;
+            margin: 10px 0;
+            color: #c5c6c7;
+        }
+        #planet-trait {
+            font-style: italic;
+        }
+        button {
+            background-color: #45a29e;
+            color: #0b0c10;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 25px;
+            transition: 0.2s;
+        }
+        button:hover {
+            background-color: #66fcf1;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Galactic Planet Generator 🪐</h1>
+        <p>Discover a brand new world in the cosmos!</p>
+        
+        <div class="planet-card" id="planet-card">
+            <h2 id="planet-name">???</h2>
+            <p id="planet-trait">Click the button to scan the galaxy.</p>
+        </div>
+        
+        <button onclick="generatePlanet()" id="gen-btn">Discover Planet</button>
+    </div>
+
+    <script>
+        async function generatePlanet() {
+            const btn = document.getElementById('gen-btn');
+            const nameEl = document.getElementById('planet-name');
+            const traitEl = document.getElementById('planet-trait');
+            
+            btn.disabled = true;
+            btn.textContent = "Scanning cosmos...";
+
+            try {
+                const response = await fetch('/generate');
+                const data = await response.json();
+                
+                nameEl.textContent = data.name;
+                traitEl.textContent = data.trait;
+            } catch (error) {
+                nameEl.textContent = "Error 404";
+                traitEl.textContent = "Failed to communicate with the galactic telescope.";
+            }
+
+            btn.textContent = "Discover Another";
+            btn.disabled = false;
+        }
+    </script>
+</body>
+</html>
