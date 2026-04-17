@@ -15,6 +15,13 @@ jobs:
 
       - name: Build Docker
         run: docker build -t test .
-
+        
+      - name: Run Trivy Vulnerability Scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: 'test-image'
+          format: 'table'
+          exit-code: '0'
+          
       - name: Docker run
         run: docker run -d -p 5000:5000 test
