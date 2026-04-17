@@ -19,7 +19,7 @@ jobs:
       - name: Run Trivy Vulnerability Scanner
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: 'test-image'
+          image-ref: 'test'
           format: 'table'
           exit-code: '0'
           
